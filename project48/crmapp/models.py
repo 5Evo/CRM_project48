@@ -4,7 +4,15 @@ this module keeps models for DB
 from django.db import models
 
 
-# Create your models here.
+class Tag(models.Model):
+    '''
+    The Class (model for DB) for Tags
+    '''
+    name = models.CharField(max_length=16, unique=True)
+
+    def __str__(self):
+        return f'{self.name} '
+
 
 class Lead(models.Model):
     '''
@@ -20,9 +28,12 @@ class Lead(models.Model):
     mail = models.EmailField(max_length=254, blank=True)
     VK = models.CharField(max_length=40, blank=True)
     TG = models.CharField(max_length=40, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
+    image = models.ImageField(upload_to='avatar', null=True, blank=True)
 
     def __str__(self):
         return f'{self.first_name} {self.middle_name} {self.last_name}'
+
 
 class Status(models.Model):
     '''
@@ -33,6 +44,7 @@ class Status(models.Model):
     def __str__(self):
         return str(self.name)
 
+
 class Action(models.Model):
     '''
     TThe Class (model for DB) of Action's types for Leads
@@ -41,6 +53,7 @@ class Action(models.Model):
 
     def __str__(self):
         return str(self.name)
+
 
 class NextAction(models.Model):
     '''
