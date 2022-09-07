@@ -36,7 +36,6 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th></th>
                                             <th>Имя</th>
                                             <th>Фамилия</th>
                                             <th>Телефон</th>
@@ -44,12 +43,12 @@
                                             <th>e-mail</th>
                                             <th>VK</th>
                                             <th>Telegramm</th>
+                                            <th>ID</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
-                                            <th></th>
                                             <th>first_name</th>
                                             <th>last_name</th>
                                             <th>phoneNumber</th>
@@ -57,26 +56,26 @@
                                             <th>mail</th>
                                             <th>VK</th>
                                             <th>TG</th>
+                                            <th>ID</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                    {% for lead in leads %}
+                                    {% for lead in object_list %}
                                         <tr>
                                             <td>{{ lead.id }}</td>
-                                            <td>
-                                                <a href="{% url 'crm:lead_card' id=lead.id %}">
-                                                    <span class="text-primary">
-                                                        <i class="fas fa-user-edit fa-1x"></i>
-                                                    </span>
-                                                </a>
-                                            </td>
-                                            <td><a href="{% url 'crm:lead_card' id=lead.id %}">{{ lead.first_name }}</a></td>
-                                            <td><a href="{% url 'crm:lead_card' id=lead.id %}">{{ lead.last_name }}</a></td>
+                                            <td><a href="{% url 'crm:lead_card' pk=lead.pk %}">{{ lead.first_name }}</a></td>
+                                            <td><a href="{% url 'crm:lead_card' pk=lead.pk %}">{{ lead.last_name }}</a></td>
                                             <td>{{ lead.phoneNumber }}</td>
                                             <td>{{ lead.secondPhoneNumber }}</td>
                                             <td>{{ lead.mail }}</td>
                                             <td>{{ lead.VK }}</td>
                                             <td>{{ lead.TG }}</td>
+                                            <td>
+                                                {{ lead.id }}
+                                                <a href="{% url 'crm:lead_delete' pk=lead.pk %}">
+                                                    <i class="fas fa-user-times fa-pull-right fa-1x"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>

@@ -2,11 +2,13 @@
 The module fill DB with test data form files.
 All files (*.txt) are stored in the /project48/test_data folder
 '''
-
+import os
 from pathlib import Path
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.management.base import BaseCommand
+from django.conf import settings
 from crmapp.models import Status, Action, Lead, Tag
+
 
 
 class Command(BaseCommand):
@@ -27,8 +29,14 @@ def read_data(file):
     :param file: file_name
     :return:
     '''
-    dir_name = 'project48/test_data/'
-    path_to_file = Path.cwd() / dir_name / file
+
+    ''' 
+    1-й способ одресации к папке:
+    # dir_name = 'project48/test_data/'
+    # path_to_file = Path.cwd() / dir_name / file
+    '''
+
+    path_to_file = os.path.join(settings.BASE_DIR, 'project48', 'test_data', file)
     try:
         with open(path_to_file, 'r', encoding="utf-8") as test_file:
             result = test_file.read().split("\n")

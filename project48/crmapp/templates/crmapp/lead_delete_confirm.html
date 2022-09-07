@@ -17,12 +17,12 @@
                         <span class="icon text-white-50">
                             <i class="fas fa-arrow-left"></i>
                         </span>
-                        <span class="text">Лиды</span>
+                        <span class="text">Не удалять</span>
                         </a> <br><br>
                     <!-- end button back to lead -->
 
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Карточка '{{ lead.last_name }} {{ lead.first_name }}'</h1>
+                        <h1 class="h3 mb-0 text-danger">Удаляем '{{ lead.last_name }} {{ lead.first_name }}'</h1>
                     </div>
 
                     <div class="row">
@@ -117,26 +117,7 @@
 
                             <!-- Dropdown Card Example -->
                             <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">{{ object.last_name }} {{ object.first_name }}</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Создать для лида:</div>
-                                            <a class="dropdown-item" href="#">Фотосессию..</a>
-                                            <a class="dropdown-item" href="#">Задачу..</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="{% url 'crm:lead_update' pk=object.pk %}">Изменить...</a>
-                                            <a class="dropdown-item" href="{% url 'crm:lead_delete' pk=object.pk %}">Удалить Лид</a>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <p> ИМЯ: {{ object.first_name }}</p>
@@ -179,7 +160,11 @@
                         </div>
 
                     </div>
-
+                <form class="user" method="POST", enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p class="text-danger"> Вы уверены? </p>
+                    <button type="submit" class="btn btn-danger btn-user btn-block" id="DeleteLeadButton">Да</button>
+                </form>
                 </div>
                 <!-- /.container-fluid -->
 

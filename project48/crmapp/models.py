@@ -23,7 +23,7 @@ class Lead(models.Model):
     last_name = models.CharField(max_length=40)
     create = models.DateField(auto_now_add=True)
     update = models.DateField(auto_now=True)
-    phoneNumber = models.CharField(unique=True, max_length=15, blank=True)
+    phoneNumber = models.CharField(max_length=15, blank=True)
     secondPhoneNumber = models.CharField(max_length=15, blank=True)
     mail = models.EmailField(max_length=254, blank=True)
     VK = models.CharField(max_length=40, blank=True)
