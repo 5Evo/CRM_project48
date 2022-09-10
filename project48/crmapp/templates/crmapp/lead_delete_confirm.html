@@ -25,6 +25,13 @@
                         <h1 class="h3 mb-0 text-danger">Удаляем '{{ lead.last_name }} {{ lead.first_name }}'</h1>
                     </div>
 
+                    <form class="user" method="POST", enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <p class="text-danger"> Вы уверены? </p>
+                        <button type="submit" class="btn btn-danger btn-user btn-left" id="DeleteLeadButton">Удалить</button>
+                        <hr>
+                    </form>
+
                     <div class="row">
 
                         <!-- Earnings (Monthly) Card Example -->
@@ -160,11 +167,7 @@
                         </div>
 
                     </div>
-                <form class="user" method="POST", enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <p class="text-danger"> Вы уверены? </p>
-                    <button type="submit" class="btn btn-danger btn-user btn-block" id="DeleteLeadButton">Да</button>
-                </form>
+
                 </div>
                 <!-- /.container-fluid -->
 

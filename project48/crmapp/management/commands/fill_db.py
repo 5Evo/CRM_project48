@@ -113,6 +113,6 @@ def add_leads(quantity=30):
             TG = f'@tg_name_{counter}'
             Lead.objects.create(first_name = first_name, last_name = last_name,
                             phoneNumber = phoneNumber, secondPhoneNumber = secondPhoneNumber,
-                            mail = mail, VK = VK, TG = TG)
+                            mail = mail, VK = VK, TG = TG, user_id = 1)
             print(f'Сохранили "lead{counter}" в БД.')
     print('Записали Leads в БД')

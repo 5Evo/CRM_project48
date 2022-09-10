@@ -1,4 +1,5 @@
-"""project48 URL Configuration
+"""
+userapp URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -13,17 +14,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
+from django.urls import path
+from django.contrib.auth.views import LogoutView
+from userapp import views
+
+
+app_name = 'userapp'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('crmapp.urls', namespace='crm')),
-    path('user/', include('userapp.urls', namespace='user')),
+    path('login/', views.UserLoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('register/', views.UserCreateView.as_view(), name='register'),
 ]
-
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

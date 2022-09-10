@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
@@ -10,30 +11,57 @@ def main_view(request):
     return render(request, 'crmapp/index.html', context={})
 
 
-class LeadListView(ListView):
+class LeadListView(LoginRequiredMixin, ListView):
     model = Lead
     template_name = 'crmapp/lead_list.html'
 
+    def get_queryset(self):
+        """
+        Получение данных
+        :return:
+        """
+        return Lead.objects.filter(user=self.request.user)
 
-class LeadDetailView(DetailView):
+
+class LeadDetailView(LoginRequiredMixin, DetailView):
     model = Lead
     template_name = 'crmapp/lead_card.html'
 
 
-class LeadCreateView(CreateView):
+class LeadCreateView(LoginRequiredMixin, CreateView):
     form_class = CreateForm
     model = Lead
     success_url = reverse_lazy('crm:leads')
     template_name = 'crmapp/create_lead.html'
 
-class LeadUpdateView(UpdateView):
+    def post(self, request, *args, **kwargs):
+        """
+        Пришел POST запрос
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        '''
+        Метод срабатывает после того, как форма валидна
+        :param form:
+        :return:
+        '''
+        # self.request.user - текущий пользователь
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+class LeadUpdateView(LoginRequiredMixin, UpdateView):
     form_class = CreateForm
     model = Lead
     success_url = reverse_lazy('crm:leads')
     template_name = 'crmapp/update_lead.html'
 
 
-class LeadDeleteView(DeleteView):
+class LeadDeleteView(LoginRequiredMixin, DeleteView):
     model = Lead
     success_url = reverse_lazy('crm:leads')
     template_name = 'crmapp/lead_delete_confirm.html'
