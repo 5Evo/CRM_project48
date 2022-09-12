@@ -13,7 +13,7 @@ class Tag(models.Model):
     name = models.CharField(max_length=16, unique=True)
 
     def __str__(self):
-        return f'{self.name} '
+        return f'{self.name}'
 
 
 class Lead(models.Model):
@@ -36,6 +36,9 @@ class Lead(models.Model):
 
     def __str__(self):
         return f'{self.first_name} {self.middle_name} {self.last_name}'
+
+    def has_image(self):
+        return bool(self.image)
 
 
 class Status(models.Model):

@@ -51,6 +51,8 @@ class LeadCreateView(LoginRequiredMixin, CreateView):
         :return:
         '''
         # self.request.user - текущий пользователь
+        # Передадим в текущую форму (form.instance) создания Лида юзера, который заполняет форму
+        # другими словами укажем в качестве владельца Лида текущего пользователя:
         form.instance.user = self.request.user
         return super().form_valid(form)
 

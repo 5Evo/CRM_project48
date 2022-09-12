@@ -165,7 +165,7 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Справочная информация лида</h6>
                                 </div>
                                 <div class="card-body">
-                                    {% if lead.image %}
+                                    {% if lead.has_image %}
                                     <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
                                             src="{{ lead.image.url }}" alt="...">
                                     {% else %}
