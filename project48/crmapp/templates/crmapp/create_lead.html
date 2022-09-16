@@ -25,6 +25,14 @@
                                 {% for field  in form %}
                                     {{ field }}<br>
                                 {% endfor %}
+
+                                {% if form.phoneNumber.errors %}
+                                    <hr>
+                                    <div class="alert alert-danger" role="alert">
+                                    {{form.phoneNumber.errors}}
+                                    </div>
+                                {% endif %}
+
                                 <br>
                                 <button type="submit" class="btn btn-primary btn-user btn-block" id="CreateLeadButton">Создать Новый лид</button>
                             </form>

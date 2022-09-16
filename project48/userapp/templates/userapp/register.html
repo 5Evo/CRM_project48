@@ -27,10 +27,12 @@
                                     <form method='POST' class="user">
 
                                         {% csrf_token %}
-                                        {# form.as_p #}
-                                        {% for field  in form %}
-                                        {{ field }}<br>
-                                        {% endfor %}
+                                        {{ form.as_p }}
+
+<!--                                        {% for field  in form %}-->
+<!--                                            {{ field.errors }}-->
+<!--                                            {{ field.label_tag }} {{ field }}<br>-->
+<!--                                        {% endfor %}-->
                                         <br>
                                         <hr>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">

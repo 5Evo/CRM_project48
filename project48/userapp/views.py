@@ -1,12 +1,9 @@
-from django.shortcuts import render
-from django.contrib.auth.views import LoginView,LogoutView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 
-from .forms import RegistrationForm, LoginForm
+from .forms import LoginForm, CustomUserCreationForm
 from django.views.generic import CreateView
 from .models import CrmUser
-
-# Create your views here.
 
 
 class UserLoginView(LoginView):
@@ -16,7 +13,6 @@ class UserLoginView(LoginView):
 
 class UserCreateView(CreateView):
     model = CrmUser
-    template_name = 'userapp/register.html'
-    form_class = RegistrationForm
+    form_class = CustomUserCreationForm
     success_url = reverse_lazy('user:login')
-
+    template_name = 'userapp/register.html'

@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 
 from .models import Lead
-from .forms import CreateForm
+from .forms import CreateForm, UserChangeForm
 
 
 def main_view(request):
@@ -13,14 +13,19 @@ def main_view(request):
 
 class LeadListView(LoginRequiredMixin, ListView):
     model = Lead
-    template_name = 'crmapp/lead_list.html'
+    # Django 4.1 does not require to specify a template if name is '{object}_list.html':
+    # template_name = 'crmapp/lead_list.html'
 
     def get_queryset(self):
         """
-        Получение данных
+        Getting a list of leads for the current user
         :return:
         """
-        return Lead.objects.filter(user=self.request.user)
+        # get_by_user - custom method from UserQuerySet.get_by_user():
+        return super().get_queryset().get_by_user(self.request)
+
+        # for older version Django where 'user=self.request.user' - current (logged in) user:
+        # return Lead.objects.filter(user=self.request.user)
 
 
 class LeadDetailView(LoginRequiredMixin, DetailView):
@@ -30,6 +35,7 @@ class LeadDetailView(LoginRequiredMixin, DetailView):
 
 class LeadCreateView(LoginRequiredMixin, CreateView):
     form_class = CreateForm
+    #form_class = UserChangeForm
     model = Lead
     success_url = reverse_lazy('crm:leads')
     template_name = 'crmapp/create_lead.html'
@@ -55,6 +61,7 @@ class LeadCreateView(LoginRequiredMixin, CreateView):
         # другими словами укажем в качестве владельца Лида текущего пользователя:
         form.instance.user = self.request.user
         return super().form_valid(form)
+
 
 class LeadUpdateView(LoginRequiredMixin, UpdateView):
     form_class = CreateForm
