@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'crmapp',
     'userapp',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'project48.urls'
@@ -141,3 +143,10 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 LOGIN_URL ='/user/login/'
+
+# Django debug-toolbar
+INTERNAL_IPS = [
+    "127.0.0.1",
+    "192.168.1.99",
+    # ...
+]

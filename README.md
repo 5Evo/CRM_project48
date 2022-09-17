@@ -10,7 +10,10 @@ This project is under development.
 <li>execute the commands:</li><br>
    <b>    python manage.py migrate<br>
        python manage.py createsuperuser<br>
-       python manage.py fill_db<br><br>
+       python manage.py fill_db<br>
+       python manage.py runserver<br>
+<br>
 </b>
 </ol>
 These commands will create a database and fill it with test data<br>
+l create a database and fill it with test data<br>
