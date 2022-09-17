@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+    CRM_48 - Tables
+{% endblock %}
+
+
+{% block custom_page %}
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">Лиды</h1>
+                            <!-- Create_lead button -->
+                                <a href="{% url 'crm:create_lead' %}" class="btn btn-primary btn-icon-split btn-sm">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-plus"></i>
+                                </span>
+                                <span class="text">Добавить Лид</span>
+                                </a>
+                            <!-- END Create_lead button -->
+                        </div>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>№</th>
+                                            <th>Имя</th>
+                                            <th>Фамилия</th>
+                                            <th>Телефон</th>
+                                            <th>Второй телефонr</th>
+                                            <th>e-mail</th>
+                                            <th>VK</th>
+                                            <th>Telegramm</th>
+                                            <th>№</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>№</th>
+                                            <th>first_name</th>
+                                            <th>last_name</th>
+                                            <th>phoneNumber</th>
+                                            <th>secondPhoneNumber</th>
+                                            <th>mail</th>
+                                            <th>VK</th>
+                                            <th>TG</th>
+                                            <th>№</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    {% for lead in object_list %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td><a href="{% url 'crm:lead_card' pk=lead.pk %}">{{ lead.first_name | title }}</a></td>
+                                            <td><a href="{% url 'crm:lead_card' pk=lead.pk %}">{{ lead.last_name | title }}</a></td>
+                                            <td>{{ lead.phoneNumber }}</td>
+                                            <td>{{ lead.secondPhoneNumber }}</td>
+                                            <td>{{ lead.mail }}</td>
+                                            <td>{{ lead.VK }}</td>
+                                            <td>{{ lead.TG }}</td>
+                                            <td>
+                                                {{ forloop.counter }}
+                                                <a href="{% url 'crm:lead_delete' pk=lead.pk %}">
+                                                    <i class="fas fa-user-times fa-pull-right fa-1x"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+{% endblock %}
+
+
+{% block additional_plugins %}
+
+    <!-- Page level plugins -->
+    <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+
+{% endblock %}
+
