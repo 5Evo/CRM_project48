@@ -16,4 +16,4 @@ This project is under development.
 </b>
 </ol>
 These commands will create a database and fill it with test data<br>
-l create a database and fill it with test data<br>
+
