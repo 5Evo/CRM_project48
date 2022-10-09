@@ -8,12 +8,12 @@ This project is under development.
 <li>install dependencies from the file requirements.txt</li>
 <li>Open the terminal and go to the /CRM_project 48/project48 directory</li>
 <li>execute the commands:</li><br>
-   <b>    python manage.py migrate<br>
-       python manage.py createsuperuser<br>
-       python manage.py fill_db<br>
-       python manage.py runserver<br>
+   <b>  python manage.py makemigrations<br>
+        python manage.py migrate<br>
+        python manage.py createsuperuser<br>
+        python manage.py fill_db<br>
+        python manage.py runserver<br>
 <br>
 </b>
 </ol>
 These commands will create a database and fill it with test data<br>
-l create a database and fill it with test data<br>
