@@ -133,8 +133,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="{% url 'user:login' %}">Войти</a>
-                        <a class="collapse-item" href="{% url 'user:register' %}">Регистрация</a>
+                        <a class="collapse-item" href="{% url 'userapp:login' %}">Войти</a>
+                        <a class="collapse-item" href="{% url 'userapp:register' %}">Регистрация</a>
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
@@ -379,18 +379,18 @@
                                         Activity Log
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{% url 'user:logout'%}" data-toggle="modal" data-target="#logoutModal">
+                                    <a class="dropdown-item" href="{% url 'userapp:logout'%}" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Выйти
                                     </a>
 
                                 {% else %}
-                                    <a class="dropdown-item" href="{% url 'user:login' %}" >
+                                    <a class="dropdown-item" href="{% url 'userapp:login' %}" >
                                         <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Войти
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{% url 'user:register' %}" >
+                                    <a class="dropdown-item" href="{% url 'userapp:register' %}" >
                                         <i class="fas fa-user-plus fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Регистрация
                                     </a>
@@ -442,7 +442,7 @@
                 <div class="modal-body">Выберите "Выйти" если хотите завершить текущую сессию.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Отмена</button>
-                    <a class="btn btn-primary" href="{% url 'user:logout'%}">Выйти</a>
+                    <a class="btn btn-primary" href="{% url 'userapp:logout'%}">Выйти</a>
                 </div>
             </div>
         </div>
