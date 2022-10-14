@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'crmapp',
     'userapp',
     'debug_toolbar',
+    'django_cleanup.apps.CleanupConfig',    # should be the last line in APPS
 ]
 
 MIDDLEWARE = [
