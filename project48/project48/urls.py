@@ -17,11 +17,22 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework import routers
+from crmapp.api_views import LeadViewSet, StatusViewSet, ActionViewSet, NextActionViewSet
+
+router = routers.DefaultRouter()
+router.register('leads', LeadViewSet)
+router.register('nextaction', NextActionViewSet)
+router.register('status', StatusViewSet)
+router.register('action', ActionViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('crmapp.urls', namespace='crm')),
     path('user/', include('userapp.urls', namespace='user')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('leads/', include(router.urls)),
 ]
 
 

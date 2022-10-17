@@ -43,8 +43,17 @@ INSTALLED_APPS = [
     'crmapp',
     'userapp',
     'debug_toolbar',
+    'rest_framework',
     'django_cleanup.apps.CleanupConfig',    # should be the last line in APPS
 ]
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
