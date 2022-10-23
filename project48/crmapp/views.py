@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 
-from .models import Lead
+from .models import Lead, UserDataMixin
 from .forms import CreateForm, UserChangeForm
 
 
@@ -11,24 +11,13 @@ def main_view(request):
     return render(request, 'crmapp/index.html', context={})
 
 
-class LeadListView(LoginRequiredMixin, ListView):
+class LeadListView(LoginRequiredMixin, UserDataMixin, ListView):
     model = Lead
     # Django 4.1 does not require to specify a template if name is '{object}_list.html':
     # template_name = 'crmapp/lead_list.html'
 
-    def get_queryset(self):
-        """
-        Getting a list of leads for the current user
-        :return:
-        """
-        # get_by_user - custom method from UserQuerySet.get_by_user():
-        return super().get_queryset().get_by_user(self.request)
 
-        # for older version Django where 'user=self.request.user' - current (logged in) user:
-        # return Lead.objects.filter(user=self.request.user)
-
-
-class LeadDetailView(LoginRequiredMixin, DetailView):
+class LeadDetailView(LoginRequiredMixin, UserDataMixin, DetailView):
     model = Lead
     template_name = 'crmapp/lead_card.html'
 
@@ -63,14 +52,14 @@ class LeadCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class LeadUpdateView(LoginRequiredMixin, UpdateView):
+class LeadUpdateView(LoginRequiredMixin, UserDataMixin, UpdateView):
     form_class = CreateForm
     model = Lead
     success_url = reverse_lazy('crm:leads')
     template_name = 'crmapp/update_lead.html'
 
 
-class LeadDeleteView(LoginRequiredMixin, DeleteView):
+class LeadDeleteView(LoginRequiredMixin, UserDataMixin, DeleteView):
     model = Lead
     success_url = reverse_lazy('crm:leads')
     template_name = 'crmapp/lead_delete_confirm.html'

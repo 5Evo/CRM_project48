@@ -18,21 +18,21 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
-from crmapp.api_views import LeadViewSet, StatusViewSet, ActionViewSet, NextActionViewSet
+from crmapp.api_views import LeadViewSet, StatusViewSet, ActionViewSet, NextActionViewSet, TagViewSet
 
 router = routers.DefaultRouter()
 router.register('leads', LeadViewSet)
 router.register('nextaction', NextActionViewSet)
 router.register('status', StatusViewSet)
 router.register('action', ActionViewSet)
-
+router.register('tag', TagViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('crmapp.urls', namespace='crm')),
     path('user/', include('userapp.urls', namespace='user')),
     path('api-auth/', include('rest_framework.urls')),
-    path('leads/', include(router.urls)),
+    path('api/v01/', include(router.urls)),
 ]
 
 

@@ -40,6 +40,9 @@ class OpenViewsTest(TestCase):
         self.client.login(username='admin', password='admin123')    # залогинили пользователя
         lead = mixer.blend(Lead)    # создали Лида под пользователем
 
+        print(f'тестируем созданного лида {lead.id}: {lead}')
+        print(f'Имя пользователя: {self.client.username}')
+
         # после логина все ответы должны быть '200':
         responce = self.client.get('/lead_list/')
         self.assertEqual(responce.status_code, 200)

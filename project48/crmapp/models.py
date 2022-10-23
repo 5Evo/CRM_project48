@@ -6,18 +6,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 from userapp.models import CrmUser
 
 
-# class UserManager(models.Manager):
-#     def get_queryset(self):
-#         all_objects = super().get_queryset()
-#         return all_objects.filter(user=self)
-
-
-# Протестируем ответ в StackOverflow:
-class UserQuerySet(models.QuerySet):
-    def get_by_user(self, request):
-        return self.filter(user=request.user)
-
-
 class Tag(models.Model):
     '''
     The Class (model for DB) for Tags
@@ -29,13 +17,36 @@ class Tag(models.Model):
         return f'{self.name}'
 
 
+# Создадим собственный менеджер для вывода только пользовательсктих лидов:
+
+class UserQuerySet(models.QuerySet):
+    '''
+    для применения надо переопределить методы в views.py и api_views.py
+    def get_queryset(self):
+        return super().get_queryset().get_by_user(self.request)
+    '''
+    def get_by_user(self, request):
+        return self.filter(user=request.user)
+# Создали менджер для вывода только пользовательсктих лидов
+
+
+# Mixin (for views) that restricts access to other users' data
+class UserDataMixin:
+    def get_queryset(self):
+        """
+        Getting a list of objects for the authorized user
+        get_by_user - custom method from models.py:
+        class UserQuerySet()
+        :return:
+        """
+        return super().get_queryset().get_by_user(self.request)
+
+
 class Lead(models.Model):
     '''
     The Class (model for DB) of Leads
     '''
-    #objects = models.Manager()
-    #user_objects = UserQuerySet.as_manager()
-    objects = UserQuerySet.as_manager()
+    objects = UserQuerySet.as_manager() # работает для обычных views и не работает для API
 
     first_name = models.CharField(max_length=40, verbose_name='Name')
     middle_name = models.CharField(max_length=40, blank=True)

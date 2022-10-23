@@ -1,12 +1,15 @@
-from .models import Lead, Status, Action, NextAction
+from .models import Lead, Status, Action, NextAction, Tag
 from rest_framework import serializers
 
 
 # Serializers define the API representation.
 class LeadSerializer(serializers.HyperlinkedModelSerializer):
+    user = serializers.StringRelatedField()             # user выводим в виде строки
+    tags = serializers.StringRelatedField(many=True)    # tags выводим в виде строк
+
     class Meta:
         model = Lead
-        fields = ['first_name', 'middle_name', 'last_name', 'mail']
+        fields = '__all__'
 
 
 class StatusSerializer(serializers.HyperlinkedModelSerializer):
@@ -24,4 +27,10 @@ class ActionSerializer(serializers.HyperlinkedModelSerializer):
 class NextActionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = NextAction
-        fields = ['name', 'action_type', 'action_date']
+        fields = ['lead', 'action_type', 'action_date']
+
+
+class TagSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Tag
+        fields = '__all__'
