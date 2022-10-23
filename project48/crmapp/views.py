@@ -29,6 +29,7 @@ class LeadCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('crm:leads')
     template_name = 'crmapp/create_lead.html'
 
+
     def post(self, request, *args, **kwargs):
         """
         Пришел POST запрос

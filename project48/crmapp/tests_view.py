@@ -5,7 +5,6 @@ from userapp.models import CrmUser
 
 
 class OpenViewsTest(TestCase):
-
     def setUp(self):
         self.client = Client()
 
@@ -58,3 +57,4 @@ class OpenViewsTest(TestCase):
 
         responce = self.client.get('/lead_delete/1/')
         self.assertEqual(responce.status_code, 200)
+
