@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from django.core.management.utils import get_random_secret_key
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,11 +22,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-load_dotenv()
-SECRET_KEY = os.getenv("SECRET_KEY_DJANGO")
+# load_dotenv()
+# SECRET_KEY = os.getenv("SECRET_KEY_DJANGO")
+SECRET_KEY = 'django-insecure-acs!up__!sh5q%7t-*n-n(&%+9&4$ur^*8i@upu+a!g8qfdrv='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+# DEBUG = True
+DEBUG = os.environ.get("DEBUG", default=False)        # берем значение из настроек окружения (".env")
 
 ALLOWED_HOSTS = ['*']
 
