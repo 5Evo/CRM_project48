@@ -1,12 +1,4 @@
 FROM python:3.9-bullseye
-#FROM python:3.11
-#FROM kuralabs/python3-dev
-
-#WORKDIR /usr/src/app
-#COPY environprinter.py ./
-#CMD [ "python3", "./environprinter.py" ]
-#
-
 
 # set work directory
 RUN mkdir -p /crm_user/src/app

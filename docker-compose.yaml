@@ -1,6 +1,7 @@
 version: "3.9"
 
 services:
+
   db:
     image: postgres:15
     restart: always
@@ -19,17 +20,12 @@ services:
     env_file:
       - project48/.env
     restart: always
-#    command:
-#       - bash
-#      - project48/python manage.py migrate
-#      - project48/python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./project48/:/crm_user/src/app/
     ports:
       - "8000:8000"
     environment:
       - TZ=Asia/Yekaterinburg
-
     depends_on:
       - db
     container_name: crm48_web
