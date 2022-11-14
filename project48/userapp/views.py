@@ -17,8 +17,9 @@ class UserLoginView(LoginView):
 
 
 class UserCreateView(CreateView):
-    model = CrmUser
+# Форма красивая/рабочая, но не сохраняет аватар:
     form_class = CustomUserCreationForm
+    model = CrmUser
     success_url = reverse_lazy('userapp:login')
     template_name = 'userapp/register.html'
 

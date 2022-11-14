@@ -8,7 +8,8 @@ class CrmUser(AbstractUser):
     avatar = models.ImageField(null=True, blank=True)
     def __str__(self):
         return f'{self.username} {self.first_name} {self.last_name}'
-    def has_avater(self):
+
+    def has_avatar(self):
         return bool(self.avatar)
 
     # В данный момент у каждого пользователя собственные лиды. функционал доступа нескольких пользователей

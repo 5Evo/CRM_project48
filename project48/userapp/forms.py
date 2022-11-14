@@ -20,14 +20,15 @@ from .models import CrmUser
 
 
 class CustomUserCreationForm(UserCreationForm):
+    class Meta:
+        model = CrmUser
+        fields = ('username', 'password1', 'password2', 'email', 'avatar')
+
     username = forms.CharField(label='ИМЯ', min_length=5, max_length=150, widget=forms.TextInput(attrs={'class': 'form-control'}))
     email = forms.EmailField(label='email', widget=forms.EmailInput(attrs={'class': 'form-control'}))
     password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     password2 = forms.CharField(label='Пароль (повторно)', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     avatar = forms.ImageField(label='Аватарка (по желанию)', required=False)
-    class Meta:
-        model = CrmUser
-        fields = ('username', 'password1', 'password2', 'email', 'avatar')
 
     def username_clean(self):
         username = self.cleaned_data['username'].lower()
@@ -51,13 +52,12 @@ class CustomUserCreationForm(UserCreationForm):
             raise ValidationError("Пароли не совпадают")
         return password2
 
-    def save(self, commit=True):
-        user = CrmUser.objects.create_user(
-                self.cleaned_data['username'],
-                self.cleaned_data['email'],
-                self.cleaned_data['password1']
-                )
-        return user
+    # def save(self, commit=True):
+    #     user = CrmUser.objects.create_user(
+    #             self.cleaned_data['username'],
+    #             self.cleaned_data['email'],
+    #             self.cleaned_data['password1'],
+    #     return user
 
 
 class LoginForm(AuthenticationForm):

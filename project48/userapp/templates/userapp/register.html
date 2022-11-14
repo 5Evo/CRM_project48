@@ -24,20 +24,23 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4"> Регистрация </h1>
                                     </div>
-                                    <form method='POST' class="user">
+                                    <form class="user" method="POST", enctype="multipart/form-data">
 
                                         {% csrf_token %}
                                         {{ form.as_p }}
 
 <!--                                        {% for field  in form %}-->
+<!--                                            {{ field }}<br>-->
+<!--                                        {% endfor %}-->
+
+<!--                                        {% for field  in form %}-->
 <!--                                            {{ field.errors }}-->
 <!--                                            {{ field.label_tag }} {{ field }}<br>-->
 <!--                                        {% endfor %}-->
+
                                         <br>
                                         <hr>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Зарегистрироваться
-                                        </button>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block"id="CreateUserButton"> Зарегистрироваться </button>
 
                                     </form>
                                     <hr>

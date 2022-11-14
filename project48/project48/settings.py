@@ -24,6 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY_DJANGO")
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -45,7 +46,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'rest_framework',
     'rest_framework.authtoken',
-    'django_cleanup.apps.CleanupConfig',    # should be the last line in APPS
+    'django_cleanup.apps.CleanupConfig',    # should be the last line in APPS - очищает лишние картинки из базы
 ]
 
 REST_FRAMEWORK = {
@@ -96,13 +97,22 @@ WSGI_APPLICATION = 'project48.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv("POSTGRES_NAME"), #os.environ.get('POSTGRES_NAME'),
+        'USER': os.getenv("POSTGRES_USER"),    #os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.getenv("POSTGRES_PASSWORD"),    #os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': os.getenv("POSTGRES_HOST"),
+        'PORT': 5432,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

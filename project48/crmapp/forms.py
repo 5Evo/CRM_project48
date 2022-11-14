@@ -16,6 +16,7 @@ from .models import Lead, Tag
 #     TG = forms.CharField(label='TG', required=False)
 #     image = forms.ImageField(label='ФОТО', required=False)
 
+
 # Форма для создания нового Лида
 class CreateForm(forms.ModelForm):
     class Meta:
