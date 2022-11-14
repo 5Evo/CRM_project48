@@ -12,7 +12,7 @@ services:
       POSTGRES_PASSWORD: "superuser"
     ports:
       - "5432:5432"
-    container_name: postgres_compose_15
+    container_name: crm48_pg
 
   web:
     build: ./project48
@@ -32,7 +32,7 @@ services:
 
     depends_on:
       - db
-    container_name: crm48
+    container_name: crm48_web
 
 volumes:
   postgres_data:
