@@ -17,16 +17,12 @@ services:
 
   web:
     build: ./project48
-    command: python3 manage.py runserver 0.0.0.0:8000
-      # python3 manage.py migrate
-      #
-    env_file:
-      - project48/.env.dev
-    restart: always
-    volumes:
-      - ./project48/:/usr/src/app/
+    command: gunicorn project48.wsgi:application --bind 0.0.0.0:8000
     ports:
       - "8000:8000"
+    env_file:
+      - project48/.env.prod
+    restart: always
     environment:
       - TZ=Asia/Yekaterinburg
     depends_on:
