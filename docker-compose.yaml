@@ -21,7 +21,7 @@ services:
       # python3 manage.py migrate
       #
     env_file:
-      - project48/1.env.dev
+      - project48/.env.dev
     restart: always
     volumes:
       - ./project48/:/usr/src/app/
